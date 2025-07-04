@@ -2,17 +2,18 @@ import qr from "qrcode-terminal";
 import chalk from "chalk";
 
 async function handle(err, result) {
-  if (err) {
-    console.log("error on application");
-    return;
-  }
+    if (err) {
+        console.error("Error:", err);
+        return;
+    }
 
-  const isSmall = result.type == 2;
+    const isSmall = result.type === 2;
+    
 
-  qr.generate(result.link, { small: isSmall }, (qrcode) => {
-    console.log(chalk.green("QR Code gerado com sucesso:\n"));
-    console.log(qrcode);
-  });
+    qr.generate(result.link, { small: isSmall }, (qrcode) => {
+        console.log(chalk.green("QR Code:\n"));
+        console.log(qrcode);
+    });
 }
 
 export default handle;

@@ -1,18 +1,19 @@
-import permittedCharacters from "./utils/permitted-characters.js";
+import { permittedCharacters } from "./utils/permittedCharacters.js";
 
 async function handle() {
   let characters = [];
   let password = "";
 
   const passwordLength = process.env.PASSWORD_LENGTH;
-  characters = await permittedCharacters();
+    characters = await permittedCharacters();
 
   for (let i = 0; i < passwordLength; i++) {
     const index = Math.floor(Math.random() * characters.length);
     password += characters[index];
   }
 
-  return password;
+   return password;
 }
+2
 
-export default handle;
+export { handle };
