@@ -1,26 +1,27 @@
 {
-  "name": "projeto-champions",
+  "name": "uefa_champions_api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
   "scripts": {
-    "dist": "tsup src",
-    "start:dev": "tsx --env-file=.env src/server.ts",
-    "start:watch": "tsx watch --env-file=.env  src/server.ts",
-    "start:dist": "npm run dist && node dist/src/index.js"
+    "start:dev": "tsx --env-file=.env ./src/server.ts",
+    "start:watch": "tsx watch --env-file=.env ./src/server.ts",
+    "dist": "tsup ./src",
+    "start:dist": "npm run dist && node ./dist/src/server.ts"
   },
   "keywords": [],
-  "author": "",
+  "author": "Assis",
   "license": "ISC",
   "devDependencies": {
-    "@types/cors": "^2.8.17",
-    "@types/express": "^4.17.21",
-    "tsup": "^8.0.2",
-    "tsx": "^4.7.1",
-    "typescript": "^5.4.3"
+    "@types/express": "^5.0.3",
+    "tsup": "^8.5.0",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
   },
   "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.19.1"
+    "express": "^5.1.0"
   }
 }

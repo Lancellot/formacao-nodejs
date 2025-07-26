@@ -1,37 +1,33 @@
 import { Request, Response } from "express";
-import * as service from "../services/players-service";
-import { StatisticsModel } from "../models/statistics-model";
+import * as PlayerServices from "../services/players-services";
 
-export const getPlayer = async (req: Request, res: Response) => {
-  const httpResponse = await service.getPlayerService();
-  res.status(httpResponse.statusCode).json(httpResponse.body);
+export const getAllPlayers = async (request: Request, response: Response) => {
+  const httpResponse = await PlayerServices.getAllPlayerService();
+  response.status(httpResponse.statusCode).json(httpResponse.body);
 };
 
-export const getPlayerById = async (req: Request, res: Response) => {
-  const id = parseInt(req.params.id);
-  const httpResponse = await service.getPlayerByIdService(id);
-  res.status(httpResponse.statusCode).json(httpResponse.body);
+export const getPlayerById = async (request: Request, response: Response) => {
+  const id = request.params.id;
+  const httpResponse = await PlayerServices.getPlayerById(Number(id));
+  response.status(httpResponse.statusCode).json(httpResponse.body);
 };
 
-export const postPlayer = async (req: Request, res: Response) => {
-  const bodyValue = req.body;
-  const httpResponse = await service.createPlayerService(bodyValue);
-
-  if (httpResponse) {
-    res.status(httpResponse.statusCode).json(httpResponse.body);
-  }
+export const insertPlayer = async (request: Request, response: Response) => {
+  const httpResponse = await PlayerServices.insertPlayer(request.body);
+  response.status(httpResponse.statusCode).json(httpResponse.body);
 };
 
-export const deletePlayer = async (req: Request, res: Response) => {
-  const id = parseInt(req.params.id);
-  const httpResponse = await service.deletePlayerService(id);
-
-  res.status(httpResponse.statusCode).json(httpResponse.body);
+export const deletePlayer = async (request: Request, response: Response) => {
+  const httpResponse = await PlayerServices.deletePlayer(
+    Number(request.params.id)
+  );
+  response.status(httpResponse.statusCode).json(httpResponse.body);
 };
 
-export const updatePlayer = async (req: Request, res: Response) => {
-  const id = parseInt(req.params.id);
-  const bodyValue: StatisticsModel = req.body;
-  const httpResponse = await service.updatePlayerService(id, bodyValue);
-  res.status(httpResponse.statusCode).json(httpResponse.body);
+export const patchPlayer = async (request: Request, response: Response) => {
+  const httpResponse = await PlayerServices.patchPlayer(
+    Number(request.params.id)
+  );
+
+  response.status(httpResponse.statusCode).json(httpResponse.body);
 };
